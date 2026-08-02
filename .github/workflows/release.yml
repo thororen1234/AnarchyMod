@@ -92,9 +92,6 @@ jobs:
           link() { echo "[${1}](${DOWNLOAD_URL}/anarchymod-mc-${1}-${VERSION}.jar)"; }
           join() { local IFS=","; local out="$*"; echo "${out//,/, }"; }
 
-          # Discover every configured version from its gradle.properties rather than
-          # hardcoding the list here, so adding/removing a versions/* module needs no
-          # changes to this workflow.
           mapfile -t MC_VERSIONS < <(for f in versions/*/gradle.properties; do
             grep "^minecraft_version=" "$f" | cut -d= -f2
           done | sort -V)
@@ -134,16 +131,78 @@ jobs:
           EOF
           )
 
-          # Attach every jar that was actually built for this release, discovered by
-          # glob rather than a hardcoded per-version file list.
           shopt -s nullglob
           ASSETS=(versions/*/build/libs/anarchymod-mc-*-"${VERSION}".jar)
           shopt -u nullglob
+
+          if [ ${#ASSETS[@]} -eq 0 ]; then
+            echo "::error::No built jars matched versions/*/build/libs/anarchymod-mc-*-${VERSION}.jar - refusing to create an empty release." >&2
+            exit 1
+          fi
 
           gh release create "${VERSION}" \
             --title "AnarchyMod ${VERSION}" \
             --notes "${NOTES}" \
             "${ASSETS[@]}"
+
+      - name: Update README download links
+        run: |
+          VERSION="${{ inputs.version }}"
+          REPO="${{ github.repository }}"
+          DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${VERSION}"
+
+          link() { echo "[${1}](${DOWNLOAD_URL}/anarchymod-mc-${1}-${VERSION}.jar)"; }
+          join() { local IFS=","; local out="$*"; echo "${out//,/, }"; }
+
+          mapfile -t MC_VERSIONS < <(for f in versions/*/gradle.properties; do
+            grep "^minecraft_version=" "$f" | cut -d= -f2
+          done | sort -V)
+
+          rows=()
+          group_key=""
+          group_links=()
+          group_javas=()
+
+          flush_group() {
+            [ ${#group_links[@]} -eq 0 ] && return
+            mapfile -t uniq_java < <(printf "%s\n" "${group_javas[@]}" | sort -un)
+            java_label=$(IFS="/"; echo "${uniq_java[*]}")
+            rows+=("| $(join "${group_links[@]}") | ${java_label} |")
+          }
+
+          for v in "${MC_VERSIONS[@]}"; do
+            key=$(echo "$v" | cut -d. -f1,2)
+            jv=$(grep "^java_version=" "versions/$v/gradle.properties" | cut -d= -f2)
+            if [ "$key" != "$group_key" ]; then
+              flush_group
+              group_key="$key"
+              group_links=()
+              group_javas=()
+            fi
+            group_links+=("$(link "$v")")
+            group_javas+=("$jv")
+          done
+          flush_group
+
+          {
+            echo "| Minecraft versions | Required Java |"
+            echo "| :--- | :--- |"
+            printf "%s\n" "${rows[@]}"
+          } > /tmp/versions-table.md
+
+          awk -v tablefile=/tmp/versions-table.md '
+            BEGIN { while ((getline line < tablefile) > 0) table = table line "\n" }
+            /<!-- versions-table:start -->/ { print; printf "%s", table; skip=1; next }
+            /<!-- versions-table:end -->/ { skip=0 }
+            !skip { print }
+          ' README.md > README.md.new
+          mv README.md.new README.md
+
+      - name: Commit README
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "chore(release): update README download links for ${{ inputs.version }}"
+          file_pattern: README.md
 
   set-after-version:
     needs: build
