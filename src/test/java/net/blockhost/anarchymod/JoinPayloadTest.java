@@ -1,8 +1,14 @@
 package net.blockhost.anarchymod;
 
 import io.netty.buffer.Unpooled;
+//? if <1.14.4 {
+/*import net.minecraft.util.PacketByteBuf;
+*///?} else {
 import net.minecraft.network.FriendlyByteBuf;
-//? if <1.20.2 {
+//?}
+//? if <1.14.4 {
+/*import net.minecraft.server.network.packet.CustomPayloadC2SPacket;
+*///?} elif <1.20.2 {
 /*import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
 *///?} else {
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
@@ -16,10 +22,18 @@ class JoinPayloadTest {
 
     @Test
     void encodesAnEmptyJoinPayload() throws Exception {
+        //? if <1.14.4 {
+        /*PacketByteBuf buffer = new PacketByteBuf(Unpooled.buffer());
+        *///?} else {
         FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
+        //?}
 
         try {
+            //? if <1.14.4 {
+            /*CustomPayloadC2SPacket packet = JoinPayload.createPacket();
+            *///?} else {
             ServerboundCustomPayloadPacket packet = JoinPayload.createPacket();
+            //?}
             //? if <1.20.5 {
             /*packet.write(buffer);
             *///?} else {
@@ -28,8 +42,10 @@ class JoinPayloadTest {
 
             //? if >=1.21.11 {
             assertEquals(JoinPayload.ID, buffer.readIdentifier());
-            //?} else {
+            //?} elif >=1.14.4 {
             /*assertEquals(JoinPayload.ID, buffer.readResourceLocation());
+            *///?} else {
+            /*assertEquals(JoinPayload.ID, buffer.readIdentifier());
             *///?}
             assertFalse(buffer.isReadable());
         } finally {
