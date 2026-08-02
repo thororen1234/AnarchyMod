@@ -12,6 +12,9 @@ plugins {
 
 stonecutter {
     create(rootProject) {
+        // No official Mojang mappings exist before 1.14.4, so this uses Yarn instead.
+        val yarnLegacy = arrayOf("1.14.3")
+
         val legacy = arrayOf(
             "1.14.4",
             "1.15", "1.15.1", "1.15.2",
@@ -27,6 +30,7 @@ stonecutter {
         )
         val modern = arrayOf("26.1", "26.1.1", "26.1.2", "26.2")
 
+        versions(*yarnLegacy).buildscript("yarn-build.gradle.kts")
         versions(*legacy).buildscript("build.gradle.kts")
         versions(*modern).buildscript("modern-build.gradle.kts")
     }

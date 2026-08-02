@@ -22,6 +22,12 @@ jobs:
 
       - uses: actions/upload-artifact@v7
         with:
+          name: anarchymod-mc-1.14.3
+          path: versions/1.14.3/build/libs/anarchymod-mc-1.14.3-*.jar
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v7
+        with:
           name: anarchymod-mc-1.14.4
           path: versions/1.14.4/build/libs/anarchymod-mc-1.14.4-*.jar
           if-no-files-found: error
