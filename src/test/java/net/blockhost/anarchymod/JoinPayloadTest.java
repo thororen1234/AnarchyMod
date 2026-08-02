@@ -6,7 +6,9 @@ import io.netty.buffer.Unpooled;
 *///?} else {
 import net.minecraft.network.FriendlyByteBuf;
 //?}
-//? if <1.14.4 {
+//? if <=1.13.2 {
+/*import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
+*///?} elif <1.14.4 {
 /*import net.minecraft.server.network.packet.CustomPayloadC2SPacket;
 *///?} elif <1.20.2 {
 /*import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
@@ -44,8 +46,10 @@ class JoinPayloadTest {
             assertEquals(JoinPayload.ID, buffer.readIdentifier());
             //?} elif >=1.14.4 {
             /*assertEquals(JoinPayload.ID, buffer.readResourceLocation());
-            *///?} else {
+            *///?} elif >1.12.2 {
             /*assertEquals(JoinPayload.ID, buffer.readIdentifier());
+            *///?} else {
+            /*assertEquals(JoinPayload.ID.toString(), buffer.readString(32767));
             *///?}
             assertFalse(buffer.isReadable());
         } finally {

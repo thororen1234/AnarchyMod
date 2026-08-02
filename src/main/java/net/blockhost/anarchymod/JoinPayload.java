@@ -1,6 +1,14 @@
 package net.blockhost.anarchymod;
 
-//? if <1.14.4 {
+//? if <=1.12.2 {
+/*import io.netty.buffer.Unpooled;
+import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
+import net.minecraft.util.PacketByteBuf;
+*///?} elif <=1.13.2 {
+/*import io.netty.buffer.Unpooled;
+import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
+import net.minecraft.util.PacketByteBuf;
+*///?} elif <1.14.4 {
 /*import io.netty.buffer.Unpooled;
 import net.minecraft.server.network.packet.CustomPayloadC2SPacket;
 import net.minecraft.util.PacketByteBuf;
@@ -37,7 +45,11 @@ public final class JoinPayload {
     private JoinPayload() {
     }
 
-    //? if <1.14.4 {
+    //? if <=1.12.2 {
+    /*public static CustomPayloadC2SPacket createPacket() {
+        return new CustomPayloadC2SPacket(ID.toString(), new PacketByteBuf(Unpooled.EMPTY_BUFFER));
+    }
+    *///?} elif <1.14.4 {
     /*public static CustomPayloadC2SPacket createPacket() {
         return new CustomPayloadC2SPacket(ID, new PacketByteBuf(Unpooled.EMPTY_BUFFER));
     }

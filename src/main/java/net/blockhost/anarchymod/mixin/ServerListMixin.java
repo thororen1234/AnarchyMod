@@ -1,7 +1,10 @@
 package net.blockhost.anarchymod.mixin;
 
 import net.blockhost.anarchymod.Domains;
-//? if <1.14.4 {
+//? if <=1.13.2 {
+/*import net.minecraft.client.network.ServerInfo;
+import net.minecraft.client.option.ServerList;
+*///?} elif <1.14.4 {
 /*import net.minecraft.client.options.ServerEntry;
 import net.minecraft.client.options.ServerList;
 *///?} else {
@@ -24,7 +27,11 @@ public class ServerListMixin {
     @Unique
     private static final String DEFAULT_SERVER_ADDRESS = "6b6t.org";
 
-    //? if <1.14.4 {
+    //? if <=1.13.2 {
+    /*@Shadow
+    @Final
+    private List<ServerInfo> servers;
+    *///?} elif <1.14.4 {
     /*@Shadow
     @Final
     private List<ServerEntry> serverEntries;
@@ -34,7 +41,14 @@ public class ServerListMixin {
     private List<ServerData> serverList;
     //?}
 
-    //? if <1.14.4 {
+    //? if <=1.13.2 {
+    /*@Inject(method = "loadFile", at = @At("RETURN"))
+    public void afterLoad(CallbackInfo ci) {
+        if (servers.stream().noneMatch(data -> Domains.matches(data.address, "*." + DEFAULT_SERVER_ADDRESS))) {
+            servers.add(0, new ServerInfo("6b6t", DEFAULT_SERVER_ADDRESS, false));
+        }
+    }
+    *///?} elif <1.14.4 {
     /*@Inject(method = "loadFile", at = @At("RETURN"))
     public void afterLoad(CallbackInfo ci) {
         if (serverEntries.stream().noneMatch(data -> Domains.matches(data.address, "*." + DEFAULT_SERVER_ADDRESS))) {

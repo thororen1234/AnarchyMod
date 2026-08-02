@@ -12,8 +12,14 @@ plugins {
 
 stonecutter {
     create(rootProject) {
-        // No official Mojang mappings exist before 1.14.4, so this uses Yarn instead.
-        val yarnLegacy = arrayOf("1.14.3")
+        val yarnLegacy = arrayOf(
+            "1.9.4",
+            "1.10.2",
+            "1.11.2",
+            "1.12.2",
+            "1.13.2",
+            "1.14.3"
+        )
 
         val legacy = arrayOf(
             "1.14.4",

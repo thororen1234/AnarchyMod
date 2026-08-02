@@ -18,6 +18,11 @@ Click a version below to download its jar from the latest release.
 <!-- versions-table:start -->
 | Minecraft versions | Required Java |
 | :--- | :--- |
+| [1.9.4](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.9.4-1.3.2.jar) | 8 |
+| [1.10.2](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.10.2-1.3.2.jar) | 8 |
+| [1.11.2](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.11.2-1.3.2.jar) | 8 |
+| [1.12.2](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.12.2-1.3.2.jar) | 8 |
+| [1.13.2](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.13.2-1.3.2.jar) | 8 |
 | [1.14.3](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.14.3-1.3.2.jar), [1.14.4](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.14.4-1.3.2.jar) | 8 |
 | [1.15](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.15-1.3.2.jar), [1.15.1](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.15.1-1.3.2.jar), [1.15.2](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.15.2-1.3.2.jar) | 8 |
 | [1.16](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.16-1.3.2.jar), [1.16.1](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.16.1-1.3.2.jar), [1.16.2](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.16.2-1.3.2.jar), [1.16.3](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.16.3-1.3.2.jar), [1.16.4](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.16.4-1.3.2.jar), [1.16.5](https://github.com/6b6t/AnarchyMod/releases/download/1.3.2/anarchymod-mc-1.16.5-1.3.2.jar) | 8 |

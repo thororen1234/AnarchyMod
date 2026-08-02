@@ -6,7 +6,12 @@ plugins {
 val minecraftVersion = stonecutter.current.project
 val loaderVersion = property("loader_version") as String
 val yarnMappings = property("yarn_mappings") as String
+val yarnGroup = if (hasProperty("yarn_group")) property("yarn_group") as String else "net.fabricmc"
 val javaVersion = (property("java_version") as String).toInt()
+
+repositories {
+    maven("https://maven.legacyfabric.net/")
+}
 
 version = property("mod_version")!!
 group = property("maven_group")!!
@@ -20,7 +25,7 @@ val junitJupiterVersion = if (javaVersion >= 17) "6.1.2" else "5.10.3"
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$yarnMappings:v2")
+    mappings("$yarnGroup:yarn:$yarnMappings:v2")
     modImplementation("net.fabricmc:fabric-loader:$loaderVersion")
     implementation("com.google.code.gson:gson:2.14.0")
     testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
