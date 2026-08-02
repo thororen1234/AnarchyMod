@@ -3,18 +3,19 @@
 [![Build](https://github.com/6b6t/AnarchyMod/actions/workflows/build.yml/badge.svg)](https://github.com/6b6t/AnarchyMod/actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-🔓 The Minecraft mod required to play on 6b6t — bypass Mojang's ban of the world's biggest anarchy server.
+🔓 The Minecraft mod required to play on 6b6t - bypass Mojang's ban of the world's biggest anarchy server.
 
 ## Features
 
-- **Server unblocking** — bypasses Mojang's blocked server list for known anarchy servers
-- **Auto server list** — automatically adds 6b6t to your server list if not already present
-- **Join notification** — sends a lightweight packet to the server on join for analytics
+- **Server unblocking** - bypasses Mojang's blocked server list for known anarchy servers
+- **Auto server list** - automatically adds 6b6t to your server list if not already present
+- **Join notification** - sends a lightweight packet to the server on join for analytics
 
 ## Supported Minecraft Versions
 
 | Minecraft | Module       |
 |-----------|--------------|
+| 1.16.5    | `mc-1.16.5`  |
 | 1.19.4    | `mc-1.19.4`  |
 | 1.20      | `mc-1.20`    |
 | 1.20.1    | `mc-1.20.1`  |
