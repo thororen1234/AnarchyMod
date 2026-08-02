@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class JoinPayloadTest {
 
     @Test
-    void encodesAnEmptyJoinPayload() {
+    void encodesAnEmptyJoinPayload() throws Exception {
         FriendlyByteBuf buffer = new FriendlyByteBuf(Unpooled.buffer());
 
         try {

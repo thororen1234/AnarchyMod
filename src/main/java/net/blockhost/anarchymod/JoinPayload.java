@@ -20,8 +20,10 @@ public final class JoinPayload {
     public static final Identifier ID = Identifier.fromNamespaceAndPath("anarchymod", "join");
     //? } elif >=1.21.7 {
     /*public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("anarchymod", "join");
-    *///?} else {
+    *///?} elif >=1.19.4 {
     /*public static final ResourceLocation ID = ResourceLocation.tryBuild("anarchymod", "join");
+    *///?} else {
+    /*public static final ResourceLocation ID = new ResourceLocation("anarchymod", "join");
     *///?}
 
     private JoinPayload() {
