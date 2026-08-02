@@ -146,8 +146,10 @@ jobs:
             "${ASSETS[@]}"
 
       - name: Update README download links
+        env:
+          VERSION: ${{ inputs.version }}
         run: |
-          VERSION="${{ inputs.version }}"
+          : "${VERSION:?version input is required}"
           REPO="${{ github.repository }}"
           DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${VERSION}"
 
