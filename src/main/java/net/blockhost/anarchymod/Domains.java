@@ -176,6 +176,14 @@ public final class Domains {
         return false;
     }
 
+    public static Set<String> getKnownHosts() {
+        Set<String> hosts = new HashSet<>();
+        for (String entry : domains) {
+            hosts.add(entry.startsWith("*.") ? entry.substring(2) : entry);
+        }
+        return Collections.unmodifiableSet(hosts);
+    }
+
     public static boolean matches(String input, String pattern) {
         String domain = normalizeHost(input);
         String entry = normalizeEntry(pattern);
